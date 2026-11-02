@@ -198,7 +198,7 @@ func GenerateDiskImage(ctx context.Context, req Request) error {
 									InitializeParams: &compute.AttachedDiskInitializeParams{
 										DiskSizeGb:  req.InstanceDiskSizeGB,
 										DiskType:    fmt.Sprintf("projects/%s/zones/%s/diskTypes/%s", req.ProjectName, req.Zone, req.DiskType),
-										SourceImage: "projects/debian-cloud/global/images/debian-11-bullseye-v20230912",
+										SourceImage: "projects/debian-cloud/global/images/family/debian-12",
 									},
 								},
 								&compute.AttachedDisk{
@@ -224,6 +224,7 @@ func GenerateDiskImage(ctx context.Context, req Request) error {
 						FailureMatch: []string{
 							"startup-script-url exit status 1",
 							"Failed to pull and unpack the image",
+							"Failed to download GCS path",
 						},
 					},
 				},
@@ -333,7 +334,7 @@ func VerifyDiskImage(ctx context.Context, req Request) error {
 									InitializeParams: &compute.AttachedDiskInitializeParams{
 										DiskSizeGb:  req.DiskSizeGB,
 										DiskType:    fmt.Sprintf("projects/%s/zones/%s/diskTypes/%s", req.ProjectName, req.Zone, req.DiskType),
-										SourceImage: "projects/debian-cloud/global/images/debian-11-bullseye-v20230912",
+										SourceImage: "projects/debian-cloud/global/images/family/debian-12",
 									},
 								},
 								&compute.AttachedDisk{
