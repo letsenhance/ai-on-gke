@@ -222,9 +222,9 @@ func GenerateDiskImage(ctx context.Context, req Request) error {
 						Port:         1,
 						SuccessMatch: "Unpacking is completed",
 						FailureMatch: []string{
-							"startup-script-url exit status 1",
+							// Logged by the guest agent on Debian 12 when the script cannot be downloaded or exits non-zero.
+							`Script "startup-script-url" failed with error`,
 							"Failed to pull and unpack the image",
-							"Failed to download GCS path",
 						},
 					},
 				},
