@@ -68,6 +68,9 @@ function remove_snapshot_views() {
 }
 
 function pull_images() {
+  # The pull output is truncated through a pipe; pipefail keeps the ctr exit code visible to the check below.
+  local -
+  set -o pipefail
   echo Pulling the given container images...
   for param in "$@"; do
     echo Start pulling $param ...
